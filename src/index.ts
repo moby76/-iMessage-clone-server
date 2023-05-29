@@ -49,7 +49,7 @@ async function main() {
         // 7.1.1This is the `httpServer` we created in a previous step.
         server: httpServer,
         // 7.1.2 Pass a different path here if your ApolloServer serves at a different path.
-        path: '/graphql/subscriptions',
+        path: '/subscriptions',
     });
 
     // 7.2 - Передайте схему, которую мы только что создали, и пусть WebSocketServer начнет прослушивание.
@@ -108,7 +108,7 @@ async function main() {
 
     // 11 - 
     app.use(
-        '/graphql',
+        '/',
         cors<cors.CorsRequest>(corsOptions),//в скобках применим настройки для cors которые создали раньше 
         json(),
         // Функция expressMiddleware принимает два аргумента. Первый обязательный аргумент — запущенный экземпляр ApolloServer --^
@@ -133,7 +133,7 @@ async function main() {
         const PORT = process.env.PORT
 
     await new Promise<void>((resolve) => httpServer.listen({ port: PORT  }, resolve));
-    console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
+    console.log(`🚀 Server ready at http://localhost:${PORT}`);
 }
 
 // 11 - запуск --^
