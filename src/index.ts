@@ -101,7 +101,7 @@ async function main() {
 
     // 10 - настройки для успешного обхода CORS
     const corsOptions = {
-        origin: process.env.NEXTAUTH_URL,//получим адрес с которого открыт доступ (http://localhost:3000 - клиент)
+        origin: process.env.CLIENT_ORIGIN,//получим адрес с которого открыт доступ (http://localhost:3000 - клиент)
         // origin: ["http://localhost:3000", "https://imessage-clone.onrender.com"],//получим адрес с которого открыт доступ (http://localhost:3000 - клиент)
         credentials: true
     }
