@@ -124,8 +124,8 @@ async function main() {
         expressMiddleware(server, {
             context: async ({ req, res }): Promise<GraphQLContext> => {//применить типы для контекста (через промис?)// для асинхронных функций типы передаются через промис
                 //в данном примере реализация контекста на основе пакета 'next-auth/react' функцией getSession
-                const session = await getSession({ req })
-                const cookies = req.headers.cookie
+                const session = await getSession({ req, res })
+                const cookies = res.cookie
                 console.log(cookies)
                 
 
