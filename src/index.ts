@@ -125,9 +125,9 @@ async function main() {
             context: async ({ req, res }): Promise<GraphQLContext> => {//применить типы для контекста (через промис?)// для асинхронных функций типы передаются через промис
                 //в данном примере реализация контекста на основе пакета 'next-auth/react' функцией getSession
                 const session = await getSession({ req })
-                const cookies = res.cookie
-                console.log(cookies)
-                
+                res.cookie('jid', { httpOnly: true, path: "/" })
+                console.log(req.cookies)
+
 
                 // console.log('CONTEXT SESSION', session?.user);
 
@@ -140,9 +140,9 @@ async function main() {
         })
     )
 
-        const PORT = process.env.PORT || 4000
+    const PORT = process.env.PORT || 4000
 
-    await new Promise<void>((resolve) => httpServer.listen({ port: PORT  }, resolve));
+    await new Promise<void>((resolve) => httpServer.listen({ port: PORT }, resolve));
     console.log(`🚀 Server ready at http://localhost:${PORT}`);
 }
 
