@@ -125,8 +125,12 @@ async function main() {
             context: async ({ req, res }): Promise<GraphQLContext> => {//применить типы для контекста (через промис?)// для асинхронных функций типы передаются через промис
                 //в данном примере реализация контекста на основе пакета 'next-auth/react' функцией getSession
                 const session = await getSession({ req })
-                res.cookie('jid', { httpOnly: true, path: "/" })
-                console.log(req.cookies)
+                
+                const cookies = req?.headers?.cookie
+                const parsedCookies = require('cookie').parse(cookies)
+                console.log(cookies)
+                console.log(parsedCookies)
+                
 
 
                 // console.log('CONTEXT SESSION', session?.user);
