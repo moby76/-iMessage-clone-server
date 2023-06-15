@@ -128,11 +128,23 @@ async function main() {
                 
                 const cookies = req?.headers?.cookie
                 const parsedCookies = require('cookie').parse(cookies)
-                console.log(cookies)
-                console.log(parsedCookies)
-                
+                const sessionToken = parsedCookies['next-auth.session-token']
+                if(sessionToken) {
+                    const sessionResponse = await fetch(
+                        `${process.env.CLIENT_ORIGIN}`,
+                        {
+                            headers: {
+                                Cookie: `next-auth.session-token=${sessionToken}`
+                            }
+                        }
+                    )
 
-
+                    const sessionData = await sessionResponse.json()
+                    console.log("sessionData", sessionData)
+                    return { session: sessionData, prisma, pubsub }
+                }
+                // console.log(cookies)
+                // console.log(parsedCookies)    
                 // console.log('CONTEXT SESSION', session?.user);
 
                 // вернём в КОНТЕКСТ: 
