@@ -77,6 +77,13 @@ async function main() {
     const server = new ApolloServer({
         schema,
         csrfPrevention: true,
+        // context: async ({req, res}): Promise<GraphQLContext> => {
+        //     const session = await getSession(
+        //         req,
+        //         process.env.CLIENT_ORIGIN
+        //     )
+        //         return (session, prisma)
+        // },
         plugins: [
             // Правильное завершение работы HTTP-сервера.
             ApolloServerPluginDrainHttpServer({ httpServer }),
@@ -118,6 +125,9 @@ async function main() {
             context: async ({ req, res }): Promise<GraphQLContext> => {//применить типы для контекста (через промис?)// для асинхронных функций типы передаются через промис
                 //в данном примере реализация контекста на основе пакета 'next-auth/react' функцией getSession
                 const session = await getSession({ req })
+                const cookies = req.headers.cookie
+                console.log(cookies)
+                
 
                 // console.log('CONTEXT SESSION', session?.user);
 
