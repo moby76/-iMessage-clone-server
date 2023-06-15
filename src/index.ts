@@ -131,7 +131,7 @@ async function main() {
                 const sessionToken = parsedCookies['next-auth.session-token']
                 if(sessionToken) {
                     const sessionResponse = await fetch(
-                        `${process.env.CLIENT_ORIGIN}`,
+                        'https://imessage-clone-client.vercel.app/',
                         {
                             headers: {
                                 Cookie: `next-auth.session-token=${sessionToken}`
